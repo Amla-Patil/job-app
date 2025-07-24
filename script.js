@@ -4,6 +4,7 @@ let tasks = [];
 const nameEl = document.getElementById("name");
 const emailEl = document.getElementById("email");
 const phoneEl = document.getElementById("phone");
+const countryCodeEl = document.getElementById("country-code");
 const aadharEl = document.getElementById("aadhar");
 const errorEl = document.getElementById("error");
 const userNameEl = document.getElementById("user-name");
@@ -12,6 +13,15 @@ const registerTab = document.getElementById("register-tab");
 const tasksTab = document.getElementById("tasks-tab");
 const registerForm = document.getElementById("register-form");
 const taskSection = document.getElementById("task-section");
+
+const phoneOtpInput = document.createElement("input");
+phoneOtpInput.setAttribute("type", "text");
+phoneOtpInput.setAttribute("id", "otp");
+phoneOtpInput.setAttribute("placeholder", "Enter OTP");
+
+const otpButton = document.createElement("button");
+otpButton.textContent = "Verify OTP";
+otpButton.setAttribute("id", "verify-otp-btn");
 
 const switchTab = (tab) => {
   document.querySelectorAll(".tab").forEach(btn => btn.classList.remove("active"));
@@ -37,7 +47,11 @@ function isValidAadhar(aadhar) {
   return /^\d{12}$/.test(aadhar);
 }
 
-function simulateVerification() {
+function isValidPhone(phone) {
+  return /^\d{10}$/.test(phone);
+}
+
+function simulateOTPVerification() {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(Math.random() < 0.9);  // 90% chance to verify
@@ -49,6 +63,7 @@ document.getElementById("register-btn").addEventListener("click", async () => {
   const name = nameEl.value.trim();
   const email = emailEl.value.trim();
   const phone = phoneEl.value.trim();
+  const countryCode = countryCodeEl.value.trim();
   const aadhar = aadharEl.value.trim();
 
   if (!name || !email || !phone || !aadhar) {
@@ -66,18 +81,23 @@ document.getElementById("register-btn").addEventListener("click", async () => {
     return;
   }
 
-  errorEl.textContent = "Verifying...";
-  document.getElementById("register-btn").disabled = true;
-  const verified = await simulateVerification();
-  document.getElementById("register-btn").disabled = false;
-
-  if (!verified) {
-    errorEl.textContent = "Aadhar verification failed. Try again.";
+  if (!isValidPhone(phone)) {
+    errorEl.textContent = "Phone number must be 10 digits";
     return;
   }
 
-  errorEl.textContent = "";
-  currentUser = { id: `user-${Date.now()}`, name, email, phone, aadhar };
+  errorEl.textContent = "Sending OTP...";
+
+  // Simulate OTP verification
+  const otpVerified = await simulateOTPVerification();
+
+  if (!otpVerified) {
+    errorEl.textContent = "OTP verification failed. Try again.";
+    return;
+  }
+
+  errorEl.textContent = "Verification successful!";
+  currentUser = { id: `user-${Date.now()}`, name, email, phone: `${countryCode} ${phone}`, aadhar };
   userNameEl.textContent = name;
   tasksTab.disabled = false;
 
@@ -87,6 +107,7 @@ document.getElementById("register-btn").addEventListener("click", async () => {
   phoneEl.value = "";
   aadharEl.value = "";
 
+  // Switch to tasks tab
   switchTab("tasks");
 });
 
