@@ -14,8 +14,10 @@
       <button id="tasks-tab" class="tab" disabled>Tasks</button>
     </div>
 
+    <!-- Register Form -->
     <div id="register-form" class="tab-content active">
       <h2>User Registration</h2>
+      
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" placeholder="Enter your full name" />
 
@@ -24,10 +26,12 @@
 
       <label for="phone">Phone</label>
       <div class="phone-container">
+        <!-- Country Code Dropdown -->
         <select id="country-code" name="country-code">
           <option value="+91" selected>+91 (India)</option>
-          <!-- Add other countries if needed -->
+          <!-- Add more countries if needed -->
         </select>
+        <!-- Phone Number Input -->
         <input type="tel" id="phone" name="phone" maxlength="10" placeholder="Enter your phone number" />
       </div>
 
@@ -38,11 +42,14 @@
       <button id="register-btn">Register & Verify</button>
     </div>
 
+    <!-- Task Section -->
     <div id="task-section" class="tab-content">
       <h2>Welcome, <span id="user-name"></span>!</h2>
 
+      <!-- Post a Task -->
       <div class="task-post">
         <h3>Post a Task</h3>
+        
         <label for="task-title">Title</label>
         <input type="text" id="task-title" placeholder="Task title" />
 
@@ -55,6 +62,7 @@
         <button id="post-task-btn">Post Task</button>
       </div>
 
+      <!-- Task List -->
       <div>
         <h3>Available Tasks</h3>
         <ul id="task-list"></ul>
