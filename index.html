@@ -23,7 +23,13 @@
       <input type="email" id="email" name="email" placeholder="Enter your email" />
 
       <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" />
+      <div class="phone-container">
+        <select id="country-code" name="country-code">
+          <option value="+91" selected>+91 (India)</option>
+          <!-- Add other countries if needed -->
+        </select>
+        <input type="tel" id="phone" name="phone" maxlength="10" placeholder="Enter your phone number" />
+      </div>
 
       <label for="aadhar">Aadhar</label>
       <input type="text" id="aadhar" name="aadhar" maxlength="12" placeholder="Enter your 12-digit Aadhar number" />
