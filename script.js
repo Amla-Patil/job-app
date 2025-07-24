@@ -1,5 +1,8 @@
 let currentUser = null;
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem("tasks")) || []; // Retrieve tasks from local storage if they exist
+
+// Initialize the task list from local storage
+renderTasks();
 
 const nameEl = document.getElementById("name");
 const emailEl = document.getElementById("email");
@@ -23,6 +26,7 @@ const otpButton = document.createElement("button");
 otpButton.textContent = "Verify OTP";
 otpButton.setAttribute("id", "verify-otp-btn");
 
+// Switch tabs between registration and tasks
 const switchTab = (tab) => {
   document.querySelectorAll(".tab").forEach(btn => btn.classList.remove("active"));
   document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
@@ -136,6 +140,7 @@ document.getElementById("post-task-btn").addEventListener("click", () => {
   };
 
   tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks)); // Store the tasks in local storage
   renderTasks();
 
   // Clear task form
@@ -144,6 +149,7 @@ document.getElementById("post-task-btn").addEventListener("click", () => {
   document.getElementById("task-amount").value = "";
 });
 
+// Render tasks from localStorage
 function renderTasks() {
   const taskList = document.getElementById("task-list");
   taskList.innerHTML = "";
@@ -170,5 +176,6 @@ window.acceptTask = function (taskId) {
   tasks = tasks.map(task => 
     task.id === taskId ? { ...task, status: "assigned", assignedTo: currentUser.id } : task
   );
+  localStorage.setItem("tasks", JSON.stringify(tasks)); // Update the tasks in local storage
   renderTasks();
 };
