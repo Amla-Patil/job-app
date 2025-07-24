@@ -57,13 +57,17 @@ input {
 input:focus {
   outline: none;
   border: 2px solid #007bff;
-  background-color: #fdfdfd;
+  background-color: #f7f7f7;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 button {
-  margin-top: 15px;
+  margin-top: 20px;
   padding: 10px;
-  width: 100%;
+  width: auto;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #28a745;
   color: white;
   border: none;
@@ -87,7 +91,11 @@ button:disabled {
 }
 
 .error {
-  color: red;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
   margin-top: 10px;
 }
 
@@ -102,4 +110,21 @@ button:disabled {
   margin-bottom: 10px;
   border-left: 4px solid #007bff;
   border-radius: 4px;
+}
+
+#task-list li.pending {
+  border-left: 4px solid #f0ad4e;  /* Yellow for pending */
+}
+
+#task-list li.assigned {
+  border-left: 4px solid #5bc0de;  /* Blue for assigned */
+}
+
+#task-list li.completed {
+  border-left: 4px solid #28a745;  /* Green for completed */
+}
+
+#task-list li:hover {
+  background-color: #e6f0ff;
+  cursor: pointer;
 }
