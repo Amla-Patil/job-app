@@ -9,42 +9,56 @@
 <body>
   <div class="container">
     <h1>MyFlatCart: SocioCart</h1>
-
-    <!-- Tabs for Registration, Post Tasks, and Accept Tasks -->
     <div id="tabs">
       <button id="register-tab" class="tab active">Register</button>
       <button id="tasks-tab" class="tab" disabled>Tasks</button>
     </div>
 
-    <!-- Registration Form -->
+    <!-- Register Form -->
     <div id="register-form" class="tab-content active">
       <h2>User Registration</h2>
+      
       <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="Enter your full name" />
+      <input type="text" id="name" name="name" placeholder="Enter your full name" />
 
       <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter your email" />
+      <input type="email" id="email" name="email" placeholder="Enter your email" />
 
       <label for="phone">Phone</label>
-      <input type="tel" id="phone" placeholder="Enter your phone number" />
+      <div class="phone-container">
+        <select id="country-code" name="country-code">
+          <option value="+91" selected>+91 (India)</option>
+        </select>
+        <input type="tel" id="phone" name="phone" maxlength="10" placeholder="Enter your phone number" />
+      </div>
 
       <label for="aadhar">Aadhar</label>
-      <input type="text" id="aadhar" maxlength="12" placeholder="Enter your Aadhar number" />
+      <input type="text" id="aadhar" name="aadhar" maxlength="12" placeholder="Enter your 12-digit Aadhar number" />
 
-      <button id="register-btn">Register</button>
       <p id="error" class="error"></p>
+      <button id="register-btn">Register & Verify</button>
     </div>
 
-    <!-- Task Selection Section -->
-    <div id="task-selection" class="tab-content">
-      <h2>Choose Your Role</h2>
-      <button id="post-task-btn">Post a Task</button>
-      <button id="accept-task-btn">Accept Tasks</button>
+    <!-- Post/Take Task Options -->
+    <div id="task-options" class="tab-content">
+      <h2>Welcome, <span id="user-name"></span>!</h2>
+
+      <button id="post-task-option" class="option-btn">Post Task</button>
+      <button id="take-task-option" class="option-btn">Take Task</button>
     </div>
 
-    <!-- Post a Task Section -->
-    <div id="post-task-section" class="tab-content">
-      <h2>Post a Task</h2>
+    <!-- Post Task Form -->
+    <div id="task-post-form" class="tab-content">
+      <h3>Post a Task</h3>
+      
+      <label for="task-category">Category</label>
+      <select id="task-category">
+        <option value="Cleaning">Cleaning</option>
+        <option value="Delivery">Delivery</option>
+        <option value="Tutoring">Tutoring</option>
+        <option value="Other">Other</option>
+      </select>
+
       <label for="task-title">Title</label>
       <input type="text" id="task-title" placeholder="Task title" />
 
@@ -54,34 +68,13 @@
       <label for="task-amount">Amount ₹</label>
       <input type="number" id="task-amount" placeholder="Task amount" />
 
-      <label for="task-category">Category</label>
-      <select id="task-category">
-        <option value="General">General</option>
-        <option value="Delivery">Delivery</option>
-        <option value="Technical">Technical</option>
-      </select>
-
-      <button id="submit-task-btn">Post Task</button>
-
-      <h3>My Posted Tasks</h3>
-      <ul id="posted-task-list"></ul>
+      <button id="post-task-btn">Post Task</button>
     </div>
 
-    <!-- Accept a Task Section -->
-    <div id="accept-task-section" class="tab-content">
-      <h2>Accept a Task</h2>
-
-      <label for="filter-category">Filter by Category</label>
-      <select id="filter-category">
-        <option value="All">All</option>
-        <option value="General">General</option>
-        <option value="Delivery">Delivery</option>
-        <option value="Technical">Technical</option>
-      </select>
-
-      <div id="task-list-container">
-        <ul id="task-list"></ul>
-      </div>
+    <!-- Task List (Take Task) -->
+    <div id="task-list-section" class="tab-content">
+      <h3>Available Tasks</h3>
+      <ul id="task-list"></ul>
     </div>
   </div>
 
