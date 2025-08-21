@@ -216,6 +216,35 @@ button:disabled {
   color: #4e73df;
 }
 
+/* OTP Styles */
+#otp {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+#verify-otp-btn {
+  background-color: #28a745; /* Green color for OTP verification */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#verify-otp-btn:hover {
+  background-color: #218838;
+}
+
+#verify-otp-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
 /* Custom Mobile Responsive */
 @media screen and (max-width: 768px) {
   .phone-container {
