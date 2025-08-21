@@ -182,8 +182,8 @@ button:disabled {
 /* Task Options Buttons */
 .option-btn {
   width: 48%;
-  background-color: #f0f4f8;
-  border: 1px solid #ddd;
+  background-color: #ff66b2; /* Pink background color */
+  border: 1px solid #e60073; /* Darker pink border */
   padding: 15px;
   border-radius: 10px;
   cursor: pointer;
@@ -193,7 +193,8 @@ button:disabled {
 }
 
 .option-btn:hover {
-  background-color: #e0e0e0;
+  background-color: #ff3385; /* Lighter pink when hovered */
+  border-color: #e60073; /* Darker pink border when hovered */
 }
 
 /* Register Form Adjustment */
@@ -214,35 +215,6 @@ button:disabled {
 #user-name {
   font-weight: 600;
   color: #4e73df;
-}
-
-/* OTP Styles */
-#otp {
-  width: 100%;
-  padding: 12px;
-  margin: 5px 0 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-}
-
-#verify-otp-btn {
-  background-color: #28a745; /* Green color for OTP verification */
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-#verify-otp-btn:hover {
-  background-color: #218838;
-}
-
-#verify-otp-btn:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
 }
 
 /* Custom Mobile Responsive */
