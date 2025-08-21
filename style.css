@@ -10,6 +10,7 @@ body {
   background: white;
   padding: 2rem;
   border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tab {
@@ -30,6 +31,7 @@ body {
 .tab.active {
   background: #007bff;
   color: white;
+  border-bottom: 3px solid #0056b3;
 }
 
 .tab-content {
@@ -43,13 +45,13 @@ body {
 
 label {
   display: block;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 input, select {
   width: 100%;
-  padding: 8px;
-  margin-top: 4px;
+  padding: 10px;
+  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -61,7 +63,6 @@ input:focus, select:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Style the phone number and country code */
 .phone-container {
   display: flex;
   justify-content: space-between;
@@ -114,7 +115,6 @@ button:disabled {
   margin-top: 10px;
 }
 
-/* OTP input field and verification button styling */
 #otp {
   width: 60%;
   padding: 8px;
@@ -163,18 +163,19 @@ button:disabled {
 }
 
 #task-list li.pending {
-  border-left: 4px solid #f0ad4e;  /* Yellow for pending */
+  border-left: 4px solid #f0ad4e;
 }
 
 #task-list li.assigned {
-  border-left: 4px solid #5bc0de;  /* Blue for assigned */
+  border-left: 4px solid #5bc0de;
 }
 
 #task-list li.completed {
-  border-left: 4px solid #28a745;  /* Green for completed */
+  border-left: 4px solid #28a745;
 }
 
 #task-list li:hover {
   background-color: #e6f0ff;
   cursor: pointer;
+  transform: scale(1.02);
 }
