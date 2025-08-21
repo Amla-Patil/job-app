@@ -9,15 +9,41 @@
 <body>
   <div class="container">
     <h1>MyFlatCart: SocioCart</h1>
-    
-    <!-- Tabs for switching between Post Tasks and Accept Tasks -->
+
+    <!-- Tabs for Registration, Post Tasks, and Accept Tasks -->
     <div id="tabs">
-      <button id="post-task-tab" class="tab active">Post a Task</button>
-      <button id="accept-task-tab" class="tab">Accept Tasks</button>
+      <button id="register-tab" class="tab active">Register</button>
+      <button id="tasks-tab" class="tab" disabled>Tasks</button>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="register-form" class="tab-content active">
+      <h2>User Registration</h2>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" />
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" />
+
+      <label for="aadhar">Aadhar</label>
+      <input type="text" id="aadhar" maxlength="12" placeholder="Enter your Aadhar number" />
+
+      <button id="register-btn">Register</button>
+      <p id="error" class="error"></p>
+    </div>
+
+    <!-- Task Selection Section -->
+    <div id="task-selection" class="tab-content">
+      <h2>Choose Your Role</h2>
+      <button id="post-task-btn">Post a Task</button>
+      <button id="accept-task-btn">Accept Tasks</button>
     </div>
 
     <!-- Post a Task Section -->
-    <div id="post-task-section" class="tab-content active">
+    <div id="post-task-section" class="tab-content">
       <h2>Post a Task</h2>
       <label for="task-title">Title</label>
       <input type="text" id="task-title" placeholder="Task title" />
@@ -35,7 +61,7 @@
         <option value="Technical">Technical</option>
       </select>
 
-      <button id="post-task-btn">Post Task</button>
+      <button id="submit-task-btn">Post Task</button>
 
       <h3>My Posted Tasks</h3>
       <ul id="posted-task-list"></ul>
