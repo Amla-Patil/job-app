@@ -1,5 +1,6 @@
 let currentUser = null;
 let tasks = JSON.parse(localStorage.getItem("tasks")) || []; // Retrieve tasks from local storage if they exist
+let generatedOTP = null; // Variable to store generated OTP
 
 // Initialize the task list from local storage
 renderTasks();
@@ -37,27 +38,44 @@ document.getElementById("register-btn").addEventListener("click", () => {
     return;
   }
   
-  // Proceed with registration logic (mock)
-  currentUser = {
-    name: nameEl.value,
-    email: emailEl.value,
-    phone: `${countryCodeEl.value}${phoneEl.value}`,
-    aadhar: aadharEl.value,
-  };
-
-  // Hide the register button after registration
-  document.getElementById("register-btn").style.display = "none";
-
-  // Switch to task options section
-  registerForm.classList.remove("active");
-  taskOptions.classList.add("active");
+  // Proceed with OTP generation
+  generatedOTP = Math.floor(100000 + Math.random() * 900000); // Generate random 6-digit OTP
+  console.log("Generated OTP:", generatedOTP); // For testing purposes
   
-  // Display user's name in the task options section
-  userNameEl.innerText = currentUser.name;
+  // Show OTP input and button
+  registerForm.appendChild(phoneOtpInput);
+  registerForm.appendChild(otpButton);
+  
+  errorEl.innerText = ""; // Clear previous error
 
-  // Enable tasks tab
-  tasksTab.disabled = false;
-  tasksTab.classList.remove("disabled");
+  // Add OTP verification event listener
+  otpButton.addEventListener("click", () => {
+    const enteredOTP = document.getElementById("otp").value;
+    
+    if (enteredOTP === String(generatedOTP)) {
+      // OTP is valid, proceed with registration
+      currentUser = {
+        name: nameEl.value,
+        email: emailEl.value,
+        phone: `${countryCodeEl.value}${phoneEl.value}`,
+        aadhar: aadharEl.value,
+      };
+
+      // Hide OTP input and button
+      phoneOtpInput.style.display = "none";
+      otpButton.style.display = "none";
+
+      registerForm.classList.remove("active");
+      taskOptions.classList.add("active");
+      userNameEl.innerText = currentUser.name;
+
+      // Enable tasks tab
+      tasksTab.disabled = false;
+      tasksTab.classList.remove("disabled");
+    } else {
+      errorEl.innerText = "Invalid OTP. Please try again.";
+    }
+  });
 });
 
 postTaskOption.addEventListener("click", () => {
@@ -89,6 +107,7 @@ document.getElementById("post-task-btn").addEventListener("click", () => {
     description: taskDesc,
     amount: taskAmount,
     postedBy: currentUser.name,
+    status: "Available" // Set task status
   };
 
   tasks.push(task);
@@ -110,7 +129,8 @@ function renderTasks() {
       Description: ${task.description}<br />
       Amount: ₹${task.amount}<br />
       Posted by: ${task.postedBy}<br />
-      <button onclick="acceptTask(${task.id})">Accept Task</button>
+      Status: <span style="color:${task.status === 'Available' ? 'green' : 'gray'}">${task.status}</span><br />
+      <button onclick="acceptTask(${task.id})" ${task.status === 'Accepted' ? 'disabled' : ''}>Accept Task</button>
     `;
     taskList.appendChild(taskItem);
   });
@@ -118,5 +138,7 @@ function renderTasks() {
 
 function acceptTask(taskId) {
   const task = tasks.find((task) => task.id === taskId);
+  task.status = "Accepted"; // Change task status to Accepted
+  renderTasks(); // Re-render the task list to reflect the change
   alert(`You have accepted the task: ${task.title}`);
 }
