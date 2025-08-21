@@ -5,12 +5,11 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 600px;
   margin: auto;
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tab {
@@ -31,7 +30,6 @@ body {
 .tab.active {
   background: #007bff;
   color: white;
-  border-bottom: 3px solid #0056b3;
 }
 
 .tab-content {
@@ -50,10 +48,31 @@ label {
 
 input, select {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+  padding: 8px;
+  margin-top: 4px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border: 2px solid #007bff;
+  background-color: #f7f7f7;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.phone-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.phone-container select {
+  width: 30%;
+}
+
+.phone-container input {
+  width: 65%;
 }
 
 button {
@@ -94,66 +113,39 @@ button:disabled {
   margin-top: 10px;
 }
 
-#task-list, #posted-task-list {
+#task-list {
   list-style: none;
   padding: 0;
 }
 
-#task-list li, #posted-task-list li {
+#task-list li {
   background: #f1f1f1;
-  padding: 15px;
+  padding: 10px;
   margin-bottom: 10px;
+  border-left: 4px solid #007bff;
   border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#task-list li:hover, #posted-task-list li:hover {
+#task-list li:hover {
   background-color: #e6f0ff;
   cursor: pointer;
 }
 
-#task-list li .task-title, #posted-task-list li .task-title {
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-#task-list li .task-amount, #posted-task-list li .task-amount {
-  font-size: 1.2rem;
-  color: #007bff;
-  font-weight: bold;
-}
-
-#task-list li .accept-btn {
-  padding: 8px 16px;
+.option-btn {
+  margin-top: 20px;
+  padding: 10px;
+  width: auto;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-#task-list li .accept-btn:hover {
+.option-btn:hover {
   background-color: #0056b3;
-}
-
-#task-list li .accept-btn:active {
-  background-color: #004085;
-}
-
-#task-list li .accept-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-#filter-category {
-  margin-top: 15px;
-  padding: 10px;
-}
-
-#task-list-container {
-  margin-top: 20px;
 }
