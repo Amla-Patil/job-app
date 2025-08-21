@@ -22,38 +22,40 @@ const taskListSection = document.getElementById("task-list-section");
 const postTaskOption = document.getElementById("post-task-option");
 const takeTaskOption = document.getElementById("take-task-option");
 
-const phoneOtpInput = document.createElement("input");
-phoneOtpInput.setAttribute("type", "text");
-phoneOtpInput.setAttribute("id", "otp");
-phoneOtpInput.setAttribute("placeholder", "Enter OTP");
-
-const otpButton = document.createElement("button");
-otpButton.innerText = "Verify OTP";
-otpButton.setAttribute("id", "verify-otp-btn");
-
+// Register button click listener
 document.getElementById("register-btn").addEventListener("click", () => {
   if (!nameEl.value || !emailEl.value || !phoneEl.value || !aadharEl.value) {
     errorEl.innerText = "All fields are required!";
     return;
   }
-  
-  // Proceed with registration logic (mock)
-  currentUser = {
-    name: nameEl.value,
-    email: emailEl.value,
-    phone: `${countryCodeEl.value}${phoneEl.value}`,
-    aadhar: aadharEl.value,
-  };
-  
-  registerForm.classList.remove("active");
-  taskOptions.classList.add("active");
-  userNameEl.innerText = currentUser.name;
 
-  // Enable tasks tab
-  tasksTab.disabled = false;
-  tasksTab.classList.remove("disabled");
+  // Simulate sending OTP
+  const otp = Math.floor(1000 + Math.random() * 9000); // Generate a 4-digit OTP
+  const enteredOtp = prompt(`An OTP has been sent to ${phoneEl.value}. Enter the OTP:`);
+
+  if (enteredOtp == otp) {
+    // Proceed with registration logic (mock)
+    currentUser = {
+      name: nameEl.value,
+      email: emailEl.value,
+      phone: `${countryCodeEl.value}${phoneEl.value}`,
+      aadhar: aadharEl.value,
+    };
+
+    // Hide the register form and show the task options
+    registerForm.classList.remove("active");
+    taskOptions.classList.add("active");
+    userNameEl.innerText = currentUser.name;
+
+    // Enable tasks tab
+    tasksTab.disabled = false;
+    tasksTab.classList.remove("disabled");
+  } else {
+    errorEl.innerText = "Invalid OTP, please try again.";
+  }
 });
 
+// Task options - Post or Take Task
 postTaskOption.addEventListener("click", () => {
   taskPostForm.classList.add("active");
   taskListSection.classList.remove("active");
@@ -76,6 +78,7 @@ document.getElementById("post-task-btn").addEventListener("click", () => {
     return;
   }
 
+  // New task with status field
   const task = {
     id: Date.now(),
     category: taskCategory,
@@ -83,6 +86,7 @@ document.getElementById("post-task-btn").addEventListener("click", () => {
     description: taskDesc,
     amount: taskAmount,
     postedBy: currentUser.name,
+    status: 'available' // Task is initially available
   };
 
   tasks.push(task);
@@ -104,13 +108,24 @@ function renderTasks() {
       Description: ${task.description}<br />
       Amount: ₹${task.amount}<br />
       Posted by: ${task.postedBy}<br />
-      <button onclick="acceptTask(${task.id})">Accept Task</button>
+      Status: ${task.status === 'available' ? 'Available' : 'Accepted'}<br />
+      <button onclick="acceptTask(${task.id})" ${task.status === 'accepted' ? 'disabled' : ''}>Accept Task</button>
     `;
     taskList.appendChild(taskItem);
   });
 }
 
+// Handle task acceptance (update status)
 function acceptTask(taskId) {
   const task = tasks.find((task) => task.id === taskId);
+  task.status = 'accepted'; // Mark task as accepted
+  localStorage.setItem("tasks", JSON.stringify(tasks)); // Save updated task status to localStorage
+  renderTasks(); // Refresh task list to reflect the status change
   alert(`You have accepted the task: ${task.title}`);
 }
+
+// Clear error message when user starts typing
+nameEl.addEventListener("input", () => { errorEl.innerText = ""; });
+emailEl.addEventListener("input", () => { errorEl.innerText = ""; });
+phoneEl.addEventListener("input", () => { errorEl.innerText = ""; });
+aadharEl.addEventListener("input", () => { errorEl.innerText = ""; });
